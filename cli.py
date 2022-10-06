@@ -49,6 +49,6 @@ for counter in range(0, channel_choice['name'].count()):
 choice = str(input('Enter Your Choice : '))
 
 with open('temp.m3u8', 'wb') as stream:
-    stream.write(channel_choice.at[int(choice), 'url'])
+    stream.write(str.encode(channel_choice.at[int(choice), 'url']))
     stream.close
 os.startfile('temp.m3u8')
