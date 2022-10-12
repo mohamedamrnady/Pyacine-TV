@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yacine_tv/ui/animations/scroll_effect.dart';
 import 'package:yacine_tv/ui/views/views.dart';
 
 Future main() async {
@@ -11,12 +12,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Yacine TV',
+      title: 'Pyacine TV',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: const HomeScreen(),
+      scrollBehavior: ScrollBehaviorModified(),
+      home: const CategoriesScreen(),
     );
   }
 }
