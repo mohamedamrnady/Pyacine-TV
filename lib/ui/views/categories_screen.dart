@@ -29,8 +29,10 @@ class CategoriesScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>
-                              ChannelsScreen(id: snapshot.data![index]['id']),
+                          builder: (context) => ChannelsScreen(
+                            id: snapshot.data![index]['id'],
+                            categoryName: snapshot.data![index]['name'],
+                          ),
                         ),
                       );
                     },
