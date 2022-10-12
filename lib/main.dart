@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yacine_tv/ui/animations/scroll_effect.dart';
+import 'package:yacine_tv/ui/animations/animations.dart';
 import 'package:yacine_tv/ui/views/views.dart';
 
 Future main() async {

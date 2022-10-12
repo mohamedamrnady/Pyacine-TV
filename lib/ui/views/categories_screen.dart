@@ -1,5 +1,3 @@
-// ignore_for_file: void_checks
-
 import 'package:flutter/material.dart';
 import 'package:yacine_tv/services/yacine_api.dart';
 import 'package:yacine_tv/ui/models/models.dart';
@@ -7,7 +5,6 @@ import 'package:yacine_tv/ui/views/views.dart';
 
 class CategoriesScreen extends StatelessWidget {
   const CategoriesScreen({super.key});
-  //final String _categories = 'n';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
