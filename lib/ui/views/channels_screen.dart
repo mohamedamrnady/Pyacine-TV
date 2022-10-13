@@ -14,7 +14,6 @@ class ChannelsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(categoryName),
-        backgroundColor: Colors.black,
       ),
       body: FutureBuilder(
         future: YacineAPI().getCategoryChannels(id),

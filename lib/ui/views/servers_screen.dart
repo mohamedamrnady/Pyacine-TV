@@ -13,7 +13,6 @@ class ServersScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(channelName),
-        backgroundColor: Colors.black,
       ),
       body: FutureBuilder(
         future: YacineAPI().getChannel(id),

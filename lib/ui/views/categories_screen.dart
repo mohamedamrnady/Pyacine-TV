@@ -10,7 +10,6 @@ class CategoriesScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Center(child: Text('Pyacine TV')),
-        backgroundColor: Colors.black,
       ),
       body: FutureBuilder(
         future: YacineAPI().getCategories(),
