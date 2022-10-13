@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      darkTheme: ThemeData.dark(useMaterial3: true),
+      darkTheme: ThemeData.dark(),
       themeMode: ThemeMode.system,
       scrollBehavior: ScrollBehaviorModified(),
       home: const CategoriesScreen(),
