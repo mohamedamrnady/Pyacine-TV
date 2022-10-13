@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yacine_tv/ui/models/models.dart';
 import 'package:yacine_tv/services/yacine_api.dart';
+import 'package:yacine_tv/ui/views/views.dart';
 
 class ChannelsScreen extends StatelessWidget {
   final int id;
@@ -24,8 +25,30 @@ class ChannelsScreen extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return CardModel(
                     name: snapshot.data![index]['name'],
-                    id: snapshot.data![index]['id'],
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ServersScreen(
+                            id: snapshot.data![index]['id'],
+                            channelName: snapshot.data![index]['name'],
+                          ),
+                        ),
+                      );
+                      /*
+                      FutureBuilder(
+                        future:
+                            YacineAPI().getChannel(snapshot.data![index]['id']),
+                        builder: (context, snapshot) {
+                          return DialogBox(
+                            title: channelName,
+                            content: 'Choose a server',
+                            buttons: ,
+                          );
+                        },
+                      );
+                      */
+                    },
                   );
                 });
           } else {

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart';
+import 'package:yacine_tv/ui/models/models.dart';
 
 class YacineAPI {
   final String apiUrl = 'http://ver3.yacinelive.com';
@@ -15,7 +16,6 @@ class YacineAPI {
               a[i].codeUnits[0] ^ key[i % key.length].codeUnits[0]);
     }
     var jsonFile = json.decode(result)['data'];
-    print(jsonFile);
     return jsonFile;
   }
 
@@ -25,7 +25,11 @@ class YacineAPI {
       var response = await get(url);
       return _decrypt(response.body, apiKey + response.headers['t']!);
     } catch (e) {
-      print(e.toString());
+      DialogBox(
+          title: 'Error : 001',
+          content: e.toString(),
+          buttons: const ['OK'],
+          actions: [() {}]);
     }
     return null;
   }
