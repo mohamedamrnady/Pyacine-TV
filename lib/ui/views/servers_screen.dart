@@ -7,7 +7,11 @@ import 'package:url_launcher/url_launcher.dart';
 class ServersScreen extends StatefulWidget {
   final int id;
   final String channelName;
-  const ServersScreen({super.key, required this.id, required this.channelName});
+  const ServersScreen({
+    super.key,
+    required this.id,
+    required this.channelName,
+  });
 
   @override
   State<ServersScreen> createState() => _ServersScreenState();
@@ -25,7 +29,12 @@ class _ServersScreenState extends State<ServersScreen> {
 
   @override
   void dispose() {
-    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
     super.dispose();
   }
 
@@ -56,10 +65,7 @@ class _ServersScreenState extends State<ServersScreen> {
                   );
                 });
           } else {
-            return const Center(
-                child: CircularProgressIndicator(
-              color: Colors.black,
-            ));
+            return const Center(child: CircularProgressIndicator());
           }
         }),
       ),
