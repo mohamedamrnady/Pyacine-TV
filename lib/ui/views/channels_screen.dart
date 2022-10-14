@@ -51,10 +51,7 @@ class ChannelsScreen extends StatelessWidget {
                   );
                 });
           } else {
-            return const Center(
-                child: CircularProgressIndicator(
-              color: Colors.black,
-            ));
+            return const Center(child: CircularProgressIndicator());
           }
         }),
       ),

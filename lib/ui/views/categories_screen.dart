@@ -35,9 +35,8 @@ class CategoriesScreen extends StatelessWidget {
                 });
           } else {
             return const Center(
-                child: CircularProgressIndicator(
-              color: Colors.black,
-            ));
+              child: CircularProgressIndicator(),
+            );
           }
         }),
       ),
