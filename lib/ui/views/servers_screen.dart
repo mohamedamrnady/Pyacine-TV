@@ -28,7 +28,10 @@ class ServersScreen extends StatelessWidget {
                 itemCount: snapshot.data!.length,
                 itemBuilder: (context, index) {
                   return CardModel(
-                    name: snapshot.data![index]['name'],
+                    name: snapshot.data![index]['url'].split('.')[1] +
+                        ' (' +
+                        snapshot.data![index]['name'] +
+                        ')',
                     onTap: () async {
                       final Directory tempDirectory =
                           await getTemporaryDirectory();
