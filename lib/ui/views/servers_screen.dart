@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import 'package:yacine_tv/ui/models/models.dart';
 import 'package:yacine_tv/services/yacine_api.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:open_file/open_file.dart';
 
 class ServersScreen extends StatelessWidget {
   final int id;
@@ -35,9 +35,9 @@ class ServersScreen extends StatelessWidget {
                     onTap: () async {
                       final Directory tempDirectory =
                           await getTemporaryDirectory();
-                      final File file = File('${tempDirectory.path}/temp.m3u8');
+                      final File file = File('${tempDirectory.path}/temp.m3u');
                       await file.writeAsString(snapshot.data![index]['url']);
-                      launchUrl(Uri.parse('${tempDirectory.path}/temp.m3u8'));
+                      OpenFile.open('${tempDirectory.path}/temp.m3u');
                     },
                   );
                 });

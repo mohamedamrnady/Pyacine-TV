@@ -32,8 +32,8 @@ dependencies:
   flutter:
     sdk: flutter
   http: ^0.13.5
+  open_file: ^3.2.1
   path_provider: ^2.0.11
-  url_launcher: ^6.1.6
 
 dev_dependencies:
   flutter_lints: ^2.0.0
