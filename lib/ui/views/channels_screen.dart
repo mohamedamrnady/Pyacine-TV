@@ -19,22 +19,45 @@ class ChannelsScreen extends StatelessWidget {
         future: YacineAPI().getCategoryChannels(id),
         builder: ((context, snapshot) {
           if (snapshot.hasData) {
-            return ListView.builder(
-                itemCount: snapshot.data!.length,
-                itemBuilder: (context, index) {
-                  return CardModel(
-                    name: snapshot.data![index]['name'],
-                    onTap: () {
+            return snapshot.data!.isNotEmpty
+                ? ListView.builder(
+                    itemCount: snapshot.data!.length,
+                    itemBuilder: (context, index) {
+                      return CardModel(
+                        name: snapshot.data![index]['name'],
+                        onTap: () {
+                          //var ytv = await YacineAPI()
+                          //    .getChannel(snapshot.data![index]['id']);
+                          /* ATTEMPT 1
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                          builder: (context) => ServersScreen(
-                            id: snapshot.data![index]['id'],
-                            channelName: snapshot.data![index]['name'],
-                          ),
-                        ),
+                        MaterialPageRoute(builder: (context) {
+                          return FutureBuilder(
+                              future: YacineAPI()
+                                  .getChannel(snapshot.data![index]['id']),
+                              builder: (context, snapshot) {
+                                if (snapshot.hasData) {
+                                  return VideoApp(
+                                    ytv: snapshot.data,
+                                  );
+                                }
+                                return const LoadingScreen();
+                              });
+                        }),
                       );
-                      /*
+                      */
+                          // WORKING
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ServersScreen(
+                                id: snapshot.data![index]['id'],
+                                channelName: snapshot.data![index]['name'],
+                              ),
+                            ),
+                          );
+                          //
+                          /*
                       FutureBuilder(
                         future:
                             YacineAPI().getChannel(snapshot.data![index]['id']),
@@ -47,9 +70,27 @@ class ChannelsScreen extends StatelessWidget {
                         },
                       );
                       */
-                    },
+                        },
+                      );
+                    })
+                : CardModel(
+                    name: "Get Channels",
+                    onTap: (() => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => CategoriesScreen(
+                                    categoryId: id.toString(),
+                                    pageTitle: categoryName,
+                                  )),
+                        )),
                   );
-                });
+
+            /*
+                CategoriesScreen(
+                    categoryId: id.toString(),
+                    pageTitle: categoryName,
+                  );
+                  */
           } else {
             return const Center(child: CircularProgressIndicator());
           }

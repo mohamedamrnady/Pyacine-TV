@@ -1,18 +1,23 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:yacine_tv/services/yacine_api.dart';
 import 'package:yacine_tv/ui/models/models.dart';
 import 'package:yacine_tv/ui/views/views.dart';
 
 class CategoriesScreen extends StatelessWidget {
-  const CategoriesScreen({super.key});
+  final String categoryId;
+  final String pageTitle;
+  const CategoriesScreen(
+      {super.key, required this.categoryId, required this.pageTitle});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Center(child: Text('Pyacine TV')),
+        title: Center(child: Text(pageTitle)),
       ),
       body: FutureBuilder(
-        future: YacineAPI().getCategories(),
+        future: YacineAPI().getCategory(categoryId),
         builder: ((context, snapshot) {
           if (snapshot.hasData) {
             return ListView.builder(

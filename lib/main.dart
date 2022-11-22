@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       darkTheme: ThemeData.dark(),
       themeMode: ThemeMode.system,
       scrollBehavior: ScrollBehaviorModified(),
-      home: const CategoriesScreen(),
+      home: const CategoriesScreen(categoryId: "", pageTitle: 'Pyacine TV'),
     );
   }
 }

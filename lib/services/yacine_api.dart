@@ -16,6 +16,7 @@ class YacineAPI {
               a[i].codeUnits[0] ^ key[i % key.length].codeUnits[0]);
     }
     var jsonFile = json.decode(result)['data'];
+    print(jsonFile);
     return jsonFile;
   }
 
@@ -34,12 +35,9 @@ class YacineAPI {
     return null;
   }
 
-  Future<List<dynamic>?> getCategories() async {
-    return await _request('/api/categories');
-  }
-
-  Future<List<dynamic>?> getCategory(int categoryId) {
-    return _request('/api/categories/$categoryId)');
+  Future<List<dynamic>?> getCategory(String categoryId) {
+    return _request(
+        categoryId != "" ? '/api/categories/$categoryId' : '/api/categories');
   }
 
   Future<List<dynamic>?> getCategoryChannels(int categoryId) {
