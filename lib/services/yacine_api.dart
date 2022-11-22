@@ -16,7 +16,6 @@ class YacineAPI {
               a[i].codeUnits[0] ^ key[i % key.length].codeUnits[0]);
     }
     var jsonFile = json.decode(result)['data'];
-    print(jsonFile);
     return jsonFile;
   }
 
