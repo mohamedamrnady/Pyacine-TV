@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:yacine_tv/services/yacine_api.dart';
 import 'package:yacine_tv/ui/models/models.dart';
@@ -14,7 +12,7 @@ class CategoriesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text(pageTitle)),
+        title: Text(pageTitle),
       ),
       body: FutureBuilder(
         future: YacineAPI().getCategory(categoryId),

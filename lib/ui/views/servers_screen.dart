@@ -37,11 +37,11 @@ class ServersScreen extends StatelessWidget {
                       final Directory tempDirectory =
                           await getTemporaryDirectory();
                       final File file = File('${tempDirectory.path}/temp.m3u');
-                      await file.writeAsString(
-                          '#EXTM3U\n#EXTINF:-1 referer="" user_agent="HDPlayer/3.5.47 (Linux;Android 12) ExoPlayerLib/2.14.1",' +
-                              channelName +
-                              "\n" +
-                              snapshot.data![index]['url']);
+                      await file.writeAsString('#EXTM3U' +
+                          '\n' +
+                          '#EXTINF:-1 referer="" user_agent="HDPlayer/3.5.47 (Linux;Android 12) ExoPlayerLib/2.14.1",$channelName ' +
+                          '\n' +
+                          snapshot.data![index]['url']);
                       OpenFile.open('${tempDirectory.path}/temp.m3u');
                       await Clipboard.setData(
                           ClipboardData(text: snapshot.data![index]['url']));
