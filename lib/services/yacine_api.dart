@@ -4,7 +4,7 @@ import 'package:http/http.dart';
 import 'package:yacine_tv/ui/models/models.dart';
 
 class YacineAPI {
-  final String apiUrl = 'http://ver3.yacinelive.com';
+  final String apiUrl = 'https://ver3.yacinelive.com';
   final String apiKey = 'c!xZj+N9&G@Ev@vw';
   List<dynamic> _decrypt(String enc, String key) {
     var a = const AsciiDecoder().convert(
