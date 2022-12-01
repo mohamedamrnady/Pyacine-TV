@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:flutter/services.dart';
@@ -18,6 +17,8 @@ class ServersScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String finalUrl = "";
+    String finalUserAgent = "";
     return Scaffold(
       appBar: AppBar(
         title: Text(channelName),
@@ -38,16 +39,15 @@ class ServersScreen extends StatelessWidget {
                       final Directory tempDirectory =
                           await getTemporaryDirectory();
                       final File file = File('${tempDirectory.path}/temp.m3u');
-                      var finalUrl = snapshot.data![index]['url'];
-                      await file.writeAsString('#EXTM3U\n#EXTINF:-1' +
-                          '",$channelName' +
-                          '\n#EXTVLCOPT:http-user-agent=' +
-                          snapshot.data![index]['user_agent'] +
-                          '\n' +
-                          finalUrl!);
+                      finalUrl = snapshot.data![index]['url'];
+                      finalUserAgent = snapshot.data![index]['user_agent'];
+                      await file.writeAsString('''
+#EXTM3U
+#EXTINF:-1,$channelName
+#EXTVLCOPT:http-user-agent=$finalUserAgent
+$finalUrl
+''');
                       OpenFile.open('${tempDirectory.path}/temp.m3u');
-                      await Clipboard.setData(
-                          ClipboardData(text: snapshot.data![index]['url']));
                     },
                   );
                 });
@@ -55,6 +55,20 @@ class ServersScreen extends StatelessWidget {
             return const Center(child: CircularProgressIndicator());
           }
         }),
+      ),
+      floatingActionButton: Row(
+        children: [
+          TextButton(
+            onPressed: () async =>
+                await Clipboard.setData(ClipboardData(text: finalUrl)),
+            child: const Text("Copy URL"),
+          ),
+          TextButton(
+            onPressed: () async =>
+                await Clipboard.setData(ClipboardData(text: finalUserAgent)),
+            child: const Text("Copy User Agent"),
+          ),
+        ],
       ),
     );
   }
