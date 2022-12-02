@@ -57,6 +57,7 @@ $finalUrl
         }),
       ),
       floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
         children: [
           TextButton(
             onPressed: () async =>
