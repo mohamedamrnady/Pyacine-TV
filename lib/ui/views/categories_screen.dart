@@ -19,23 +19,34 @@ class CategoriesScreen extends StatelessWidget {
         builder: ((context, snapshot) {
           if (snapshot.hasData) {
             return ListView.builder(
-                itemCount: snapshot.data!.length,
-                itemBuilder: (context, index) {
-                  return CardModel(
-                    name: snapshot.data![index]['name'],
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ChannelsScreen(
-                            id: snapshot.data![index]['id'],
-                            categoryName: snapshot.data![index]['name'],
-                          ),
-                        ),
-                      );
-                    },
-                  );
-                });
+              itemCount: snapshot.data!.length,
+              itemBuilder: (context, index) {
+                return CardModel(
+                  name: snapshot.data?[index]['name'] ??
+                      snapshot.data![index]['error'],
+                  onTap: () {
+                    snapshot.data![index]['name'] != null
+                        ? Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ChannelsScreen(
+                                id: snapshot.data![index]['id'],
+                                categoryName: snapshot.data![index]['name'],
+                              ),
+                            ),
+                          )
+                        : showDialog(
+                            context: context,
+                            builder: (context) => DialogBox(
+                              title: 'Error',
+                              content: snapshot.data![index]['error'],
+                              buttons: const [],
+                            ),
+                          );
+                  },
+                );
+              },
+            );
           } else {
             return const Center(
               child: CircularProgressIndicator(),

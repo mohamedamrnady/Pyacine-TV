@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:yacine_tv/ui/models/models.dart';
 
@@ -25,13 +26,10 @@ class YacineAPI {
       var response = await get(url);
       return _decrypt(response.body, apiKey + response.headers['t']!);
     } catch (e) {
-      DialogBox(
-          title: 'Error : 001',
-          content: e.toString(),
-          buttons: const ['OK'],
-          actions: [() {}]);
+      return [
+        {'error': e.toString()}
+      ];
     }
-    return null;
   }
 
   Future<List<dynamic>?> getCategory(String categoryId) {

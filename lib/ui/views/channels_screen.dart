@@ -24,7 +24,8 @@ class ChannelsScreen extends StatelessWidget {
                     itemCount: snapshot.data!.length,
                     itemBuilder: (context, index) {
                       return CardModel(
-                        name: snapshot.data![index]['name'],
+                        name: snapshot.data?[index]['name'] ??
+                            snapshot.data![index]['error'],
                         onTap: () {
                           //var ytv = await YacineAPI()
                           //    .getChannel(snapshot.data![index]['id']);
@@ -47,17 +48,19 @@ class ChannelsScreen extends StatelessWidget {
                       );
                       */
                           // WORKING
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ServersScreen(
-                                id: snapshot.data![index]['id'],
-                                channelName: snapshot.data![index]['name'],
-                              ),
-                            ),
-                          );
-                          //
-                          /*
+                          snapshot.data![index]['name'] != null
+                              ? Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ServersScreen(
+                                      id: snapshot.data![index]['id'],
+                                      channelName: snapshot.data![index]
+                                          ['name'],
+                                    ),
+                                  ),
+                                )
+                              //
+                              /*
                       FutureBuilder(
                         future:
                             YacineAPI().getChannel(snapshot.data![index]['id']),
@@ -70,6 +73,14 @@ class ChannelsScreen extends StatelessWidget {
                         },
                       );
                       */
+                              : showDialog(
+                                  context: context,
+                                  builder: (context) => DialogBox(
+                                    title: 'Error',
+                                    content: snapshot.data![index]['error'],
+                                    buttons: const [],
+                                  ),
+                                );
                         },
                       );
                     })

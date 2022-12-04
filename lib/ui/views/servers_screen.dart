@@ -31,23 +31,37 @@ class ServersScreen extends StatelessWidget {
                 itemCount: snapshot.data!.length,
                 itemBuilder: (context, index) {
                   return CardModel(
-                    name: snapshot.data![index]['url'].split('.')[1] +
-                        ' (' +
-                        snapshot.data![index]['name'] +
-                        ')',
+                    name: snapshot.data![index]['name'] != null
+                        ? snapshot.data![index]['url'].split('.')[1] +
+                            ' (' +
+                            snapshot.data![index]['name'] +
+                            ')'
+                        : snapshot.data![index]['error'],
                     onTap: () async {
-                      final Directory tempDirectory =
-                          await getTemporaryDirectory();
-                      final File file = File('${tempDirectory.path}/temp.m3u');
-                      finalUrl = snapshot.data![index]['url'];
-                      finalUserAgent = snapshot.data![index]['user_agent'];
-                      await file.writeAsString('''
+                      if (snapshot.data![index]['name'] != null) {
+                        final Directory tempDirectory =
+                            await getTemporaryDirectory();
+                        final File file =
+                            File('${tempDirectory.path}/temp.m3u');
+                        finalUrl = snapshot.data![index]['url'];
+                        finalUserAgent = snapshot.data![index]['user_agent'];
+                        await file.writeAsString('''
 #EXTM3U
 #EXTINF:-1,$channelName
 #EXTVLCOPT:http-user-agent=$finalUserAgent
 $finalUrl
 ''');
-                      OpenFile.open('${tempDirectory.path}/temp.m3u');
+                        OpenFile.open('${tempDirectory.path}/temp.m3u');
+                      } else {
+                        showDialog(
+                          context: context,
+                          builder: (context) => DialogBox(
+                            title: 'Error',
+                            content: snapshot.data![index]['error'],
+                            buttons: const [],
+                          ),
+                        );
+                      }
                     },
                   );
                 });
