@@ -25,7 +25,7 @@ class ChannelsScreen extends StatelessWidget {
                     itemBuilder: (context, index) {
                       return CardModel(
                         name: snapshot.data?[index]['name'] ??
-                            snapshot.data![index]['error'],
+                            snapshot.data![index]['error'].split(":")[0],
                         onTap: () {
                           //var ytv = await YacineAPI()
                           //    .getChannel(snapshot.data![index]['id']);

@@ -36,7 +36,7 @@ class ServersScreen extends StatelessWidget {
                             ' (' +
                             snapshot.data![index]['name'] +
                             ')'
-                        : snapshot.data![index]['error'],
+                        : snapshot.data![index]['error'].split(":")[0],
                     onTap: () async {
                       if (snapshot.data![index]['name'] != null) {
                         final Directory tempDirectory =

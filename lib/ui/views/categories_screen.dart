@@ -23,7 +23,7 @@ class CategoriesScreen extends StatelessWidget {
               itemBuilder: (context, index) {
                 return CardModel(
                   name: snapshot.data?[index]['name'] ??
-                      snapshot.data![index]['error'],
+                      snapshot.data![index]['error'].split(":")[0],
                   onTap: () {
                     snapshot.data![index]['name'] != null
                         ? Navigator.push(
