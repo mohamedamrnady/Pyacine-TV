@@ -1,8 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart';
-import 'package:yacine_tv/ui/models/models.dart';
 
 class YacineAPI {
   final String apiUrl = 'https://ver3.yacinelive.com';
