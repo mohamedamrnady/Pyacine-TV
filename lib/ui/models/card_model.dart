@@ -8,8 +8,6 @@ class CardModel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var brightness = SchedulerBinding.instance.window.platformBrightness;
-    bool isDarkMode = brightness == Brightness.dark;
     return InkWell(
       onTap: onTap,
       child: Container(
@@ -20,7 +18,10 @@ class CardModel extends StatelessWidget {
         decoration: BoxDecoration(
           border: Border.all(
             width: 2.5,
-            color: isDarkMode ? Colors.white : Colors.black,
+            color: SchedulerBinding.instance.window.platformBrightness ==
+                    Brightness.dark
+                ? Colors.white
+                : Colors.black,
           ),
           borderRadius: BorderRadius.circular(8),
         ),
